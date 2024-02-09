@@ -1,13 +1,23 @@
-const tarifasPorServicio = {
-    desarrolloWeb: 60,
-    programacion: 75,
-    consultoria: 100,
-};
+// Manejo de la interfaz de usuario
 
-function calcularCostoTotal() {
+document.addEventListener('DOMContentLoaded', function () {
+    const formElement = document.getElementById('formulario');
+
+    formElement.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        // Obtener datos necesarios desde la base de datos
+        const tarifasPorServicio = await obtenerTarifasPorServicio();
+
+        // Calcular costo total
+        calcularCostoTotal(tarifasPorServicio);
+    });
+});
+
+// Función para calcular el costo total
+async function calcularCostoTotal(tarifasPorServicio) {
     const tipoServicioElement = document.getElementById('tipoServicio');
     const horasTrabajadasElement = document.getElementById('horasTrabajadas');
-    const resultadoElement = document.getElementById('resultado');
 
     const tipoServicio = tipoServicioElement.value;
     const horasTrabajadas = parseFloat(horasTrabajadasElement.value);
@@ -29,14 +39,9 @@ function calcularCostoTotal() {
     }
 
     // Muestra del resultado en el DOM
-    resultadoElement.innerHTML = `
-        <p><strong>Tipo de Servicio:</strong> ${tipoServicio}</p>
-        <p><strong>Horas Trabajadas:</strong> ${horasTrabajadas}</p>
-        <p><strong>Tarifa por Hora:</strong> $${tarifaPorHora}</p>
-        <p><strong>Costo Total:</strong> $${costoTotal.toFixed(2)}</p>
-    `;
+    mostrarResultadoEnDOM(tipoServicio, horasTrabajadas, tarifaPorHora, costoTotal);
 
-    // Guardado de los datos en localStorage
+    // Guardado de los datos en la base de datos
     const servicio = {
         tipoServicio,
         horasTrabajadas,
@@ -44,10 +49,17 @@ function calcularCostoTotal() {
         costoTotal,
     };
 
-    // Recuperación los servicios existentes de localStorage
-    const serviciosGuardados = JSON.parse(localStorage.getItem('servicios')) || [];
+    await guardarServicio(servicio);
+}
 
-    // Incorporación del nuevo servicio y guarda en localStorage
-    serviciosGuardados.push(servicio);
-    localStorage.setItem('servicios', JSON.stringify(serviciosGuardados));
+// Función para mostrar el resultado en el DOM
+function mostrarResultadoEnDOM(tipoServicio, horasTrabajadas, tarifaPorHora, costoTotal) {
+    const resultadoElement = document.getElementById('resultado');
+
+    resultadoElement.innerHTML = `
+        <p><strong>Tipo de Servicio:</strong> ${tipoServicio}</p>
+        <p><strong>Horas Trabajadas:</strong> ${horasTrabajadas}</p>
+        <p><strong>Tarifa por Hora:</strong> $${tarifaPorHora}</p>
+        <p><strong>Costo Total:</strong> $${costoTotal.toFixed(2)}</p>
+    `;
 }

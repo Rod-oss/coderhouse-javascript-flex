@@ -1,0 +1,10 @@
+{
+    "tarifasPorServicio": {
+      "desarrolloWeb": 60,
+      "programacion": 75,
+      "consultoria": 100
+    },
+    "serviciosGuardados": []
+  }
+  
+  

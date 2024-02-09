@@ -10,14 +10,13 @@ h1, p {
     color: #333;
 }
 
-form {
+#formulario {
     max-width: 400px;
     margin: 20px auto;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
 }
 
 label {
@@ -27,7 +26,7 @@ label {
 }
 
 select, input {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 16px;
     border: 1px solid #ccc;
@@ -61,4 +60,10 @@ button:hover {
 #resultado p {
     margin-bottom: 10px;
     color: #333;
+}
+
+.center-image {
+    display: flex;
+    justify-content: center;
+
 }
