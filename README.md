@@ -8,7 +8,8 @@ El proyecto sigue una estructura organizada:
 
 - **css:** Carpeta que contiene los estilos CSS para la interfaz.
 - **js:**
-  - **data.js:** Archivo JavaScript para la manipulación de datos y la simulación de la base de datos local.
+  - **data.js:** Archivo JavaScript para la manipulación de datos.
+  - **data.json:** Archivo para la simulación de la base de datos local.
   - **main.js:** Archivo JavaScript para el manejo de la interfaz de usuario y eventos.
 - **assets:** Carpeta que almacena recursos multimedia, como imágenes.
 
